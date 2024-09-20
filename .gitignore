@@ -1,1 +1,5 @@
+# Don't include the virtual environment packages, because they are also too large
 .venv
+
+# Don't include processed data (pickled data) because files are too large
+pickles/*
