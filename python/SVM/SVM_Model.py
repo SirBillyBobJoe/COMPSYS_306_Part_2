@@ -5,6 +5,7 @@ from sklearn import svm
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import log_loss
 from sklearn.metrics import classification_report
+import joblib
 
 with open("./pickles/data.pickle", "rb") as f:
     df = pickle.load(f)
@@ -12,15 +13,29 @@ with open("./pickles/data.pickle", "rb") as f:
 X = df.drop(columns=["Target"])
 y = df["Target"]
 
-scaler = StandardScaler()
-X = scaler.fit_transform(X)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.7, random_state=77, stratify=y)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=77, stratify=y)
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test=scaler.transform(X_test)
+
+joblib.dump(scaler, "./joblibs/scaler.joblib")
 
 param_grid = [
     {
-        "C": [0.001],
+        "C": [0.01],
         "kernel": ["linear"],
+    },
+        {
+        "C": [0.01],
+        "kernel": ["rbf"],
+        "gamma":[0.1,1],
+    },
+        {
+        "C": [0.01],
+        "kernel": ["linear"],
+        "gamma":[0.1,1],
+        "degree":[3,4]
     }
 ]
 
@@ -32,11 +47,11 @@ model.fit(X_train, y_train)
 best_model = model.best_estimator_
 print(f"Best Parameters: {model.best_params_}")
 
-with open("./pickles/SVM_Model.pickle", "wb") as f:
-    pickle.dump(best_model, f)
+# Save the best model using joblib
+joblib.dump(best_model, "./joblibs/SVM_Model.joblib")
 
-with open("./pickles/SVM_Model.pickle", "rb") as f:
-    model = pickle.load(f)
+# Load the saved model using joblib
+model = joblib.load("./joblibs/SVM_Model.joblib")
 
 y_pred = model.predict(X_test)
 report = classification_report(y_test, y_pred)
