@@ -1,7 +1,7 @@
 from PIL import Image
 import os
 
-path = "./validation"
+path = "./myData"
 
 i=0
 # r=root, d=directories, f = files
