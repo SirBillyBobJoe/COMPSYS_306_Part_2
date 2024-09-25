@@ -1,7 +1,7 @@
 from PIL import Image
 import os
 
-path = "./validation"
+path = "./myData"
 
 i=0
 # r=root, d=directories, f = files
@@ -10,8 +10,8 @@ for r, d, f in os.walk(path):
         if file.endswith('.png'):
             pat=os.path.join(r, file)
             with Image.open(pat) as im:
-                if im.size!=(50, 50):
-                    im=im.resize((50, 50),Image.LANCZOS)
+                if im.size!=(100, 100):
+                    im=im.resize((100, 100),Image.LANCZOS)
                 im.save(pat.replace(".png",".jpg"))
             os.remove(pat)
             i+=1
@@ -19,8 +19,8 @@ for r, d, f in os.walk(path):
         elif file.endswith('.jpg'):
             pat=os.path.join(r, file)
             with Image.open(pat) as im:
-                if im.size!=(50, 50):
-                    im=im.resize((50, 50),Image.LANCZOS)
+                if im.size!=(100, 100):
+                    im=im.resize((100, 100),Image.LANCZOS)
                     im.save(pat)
                     i+=1
                     print(i,end='\r')
