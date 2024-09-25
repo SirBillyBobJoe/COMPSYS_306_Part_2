@@ -13,35 +13,24 @@ with open("./pickles/data.pickle", "rb") as f:
 X = df.drop(columns=["Target"])
 y = df["Target"]
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.7, random_state=77, stratify=y)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=77, stratify=y)
 
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test=scaler.transform(X_test)
 
-joblib.dump(scaler, "./joblibs/scaler.joblib")
+joblib.dump(scaler, "./joblibs/SVM_Scaler.joblib")
 
 param_grid = [
     {
         "C": [0.01],
         "kernel": ["linear"],
-    },
-        {
-        "C": [0.01],
-        "kernel": ["rbf"],
-        "gamma":[0.1,1],
-    },
-        {
-        "C": [0.01],
-        "kernel": ["linear"],
-        "gamma":[0.1,1],
-        "degree":[3,4]
     }
 ]
 
 
 svc = svm.SVC(probability=True, class_weight="balanced", max_iter=10000)
-model = GridSearchCV(svc, param_grid, cv=3, scoring="accuracy", verbose=3)
+model = GridSearchCV(svc, param_grid, cv=2, scoring="accuracy", verbose=3)
 model.fit(X_train, y_train)
 
 best_model = model.best_estimator_

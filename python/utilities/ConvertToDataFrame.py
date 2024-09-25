@@ -3,8 +3,9 @@ import numpy as np
 from skimage.io import imread
 import pandas as pd
 import pickle
+from skimage.transform import resize
 
-datadir = "myData"
+datadir = "validation"
 label_csv = "labels.csv"
 flat_data_arr = []
 target_arr = []
@@ -13,11 +14,13 @@ labels_df = pd.read_csv(label_csv)
 print(f"Loaded labels:\n{labels_df.head()}")
 
 for class_id in labels_df["ClassId"]:
-    print(f'Loading category: {class_id} - {labels_df.loc[labels_df["ClassId"] == class_id, "Name"].values[0]}')
+
     path = os.path.join(datadir, str(class_id))
     for img in os.listdir(path):
         try:
             img_array = imread(os.path.join(path, img))
+
+            resized_img = resize(img_array, (100, 100), anti_aliasing=True)
             flattened_img = img_array.flatten()
 
             if len(flat_data_arr) > 0 and len(flattened_img) != len(flat_data_arr[0]):
@@ -42,6 +45,6 @@ df["Target"] = target
 print("DataFrame shape:", df.shape)
 print(df)
 
-pickle.dump(df, open("./pickles/data.pickle", "wb"))
+pickle.dump(df, open("./pickles/validationData.pickle", "wb"))
 print("Pickle is dumped successfully")
 
