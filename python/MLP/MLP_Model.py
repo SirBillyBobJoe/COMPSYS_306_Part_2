@@ -36,7 +36,7 @@ def create_model(hidden_layers=1, nodes_per_layer=32, activation='relu', learnin
         model.add(tf.keras.layers.Dense(nodes_per_layer, activation=activation))
     
     # Add the output layer with 43 nodes (one for each class) and softmax activation for multiclass classification
-    model.add(tf.keras.layers.Dense(43, activation='softmax'))
+    model.add(tf.keras.layers.Dense(5, activation='softmax'))
 
     # Choose optimizer (Adam or SGD) based on input hyperparameters
     if optimizer == 'adam':
