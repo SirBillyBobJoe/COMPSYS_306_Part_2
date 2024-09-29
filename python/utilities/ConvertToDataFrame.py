@@ -5,7 +5,7 @@ import pandas as pd
 import pickle
 from skimage.transform import resize
 
-datadir = "validation"
+datadir = "myData"
 label_csv = "labels.csv"
 flat_data_arr = []
 target_arr = []
@@ -45,6 +45,6 @@ df["Target"] = target
 print("DataFrame shape:", df.shape)
 print(df)
 
-pickle.dump(df, open("./pickles/validationData.pickle", "wb"))
+pickle.dump(df, open("./pickles/dataset.pickle", "wb"))
 print("Pickle is dumped successfully")
 
