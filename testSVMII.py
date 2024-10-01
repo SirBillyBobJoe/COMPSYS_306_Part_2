@@ -9,7 +9,7 @@ modelPath = "joblibs/poly32x32.joblib"
 scalerPath = 'joblibs/polyscaler32x32.joblib'
 # Load the model
 model = joblib.load(modelPath) 
-classUnderTest = 1
+classUnderTest = 4
 path = f'validation/{classUnderTest}' 
 images = []
 fileNames = []

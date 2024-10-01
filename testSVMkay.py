@@ -4,7 +4,7 @@ import numpy as np
 import tensorflow as tf
 from sklearn.metrics import classification_report
 
-modelPath = "joblibs/poly32x32.joblib"
+modelPath = "joblibs/poly32x32-3.joblib"
 scalarPath = 'joblibs/polyscaler32x32.joblib'
 validationPath = 'pickles/validationdata32x32.pickle'
 

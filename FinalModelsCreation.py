@@ -20,7 +20,7 @@ print("Training...")
 model = svm.SVC(
     C=0.01,
     kernel='poly',
-    degree=2,
+    degree=3,
     gamma=0.1,
     probability=True,
     class_weight='balanced',
@@ -29,7 +29,7 @@ model = svm.SVC(
 model.fit(x_train_normalised, y)
 print("Training completed")
 # Save model
-joblib.dump(model, 'joblibs/poly32x32.joblib')
+joblib.dump(model, 'joblibs/poly32x32-3.joblib')
 print('SVM training completed.')
 
 # Test Accuracy: 0.9831286073701346
