@@ -4,19 +4,22 @@ import numpy as np
 import tensorflow as tf
 from sklearn.metrics import classification_report
 
+modelPath = "joblibs/poly32x32.joblib"
+scalarPath = 'joblibs/polyscaler32x32.joblib'
+validationPath = 'pickles/validationdata32x32.pickle'
 
 # Load the model
-model = joblib.load("joblibs/standardised100x100.joblib") 
+model = joblib.load(modelPath) 
 
 # Load the validation data
-df = pickle.load(open('pickles/validationdata100x100.pickle', 'rb'))
+df = pickle.load(open(validationPath, 'rb'))
 
 # Separate features and target
 X = df.drop(columns=['Target'])
 y = df['Target']
 
 # Normalise the data.
-scaler = joblib.load('joblibs/scaler100x100.joblib')
+scaler = joblib.load(scalarPath)
 x_test_normalised = scaler.transform(X)
 
 print("predicting")

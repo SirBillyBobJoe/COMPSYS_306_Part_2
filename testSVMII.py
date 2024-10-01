@@ -3,31 +3,30 @@ import joblib
 from matplotlib import pyplot as plt
 import cv2
 from skimage.transform import resize
+from skimage.io import imread
 
+modelPath = "joblibs/poly32x32.joblib"
+scalerPath = 'joblibs/polyscaler32x32.joblib'
 # Load the model
-model = joblib.load("joblibs/standardised100x100.joblib") 
-classUnderTest = 0
+model = joblib.load(modelPath) 
+classUnderTest = 1
 path = f'validation/{classUnderTest}' 
 images = []
 fileNames = []
 # Load the validation data
 for img in os.listdir(path):
     try:
-        img_array = cv2.imread(os.path.join(path, img))
-        resized_img = resize(img_array, (100, 100), anti_aliasing=True)
+        img_array = imread(os.path.join(path, img))
+        resized_img = resize(img_array, (32, 32), anti_aliasing=True)
         flattened_img = resized_img.flatten()
         images.append(flattened_img)
         fileNames.append(img)
-        # flattened_img_reshaped = flattened_img.reshape(1,-1)
     except Exception as e:
         print(f"Error processing {img}: {e}")
         continue
 
-
-
-
-# Normalise the data.
-scaler = joblib.load('joblibs/scaler32x32.joblib')
+# Scale data
+scaler = joblib.load(scalerPath)
 x_test_normalised = scaler.transform(images)
 
 print("predicting")

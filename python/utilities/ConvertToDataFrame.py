@@ -5,7 +5,7 @@ import pandas as pd
 import pickle
 from skimage.transform import resize
 
-datadir = "validation"
+datadir = "myData"
 label_csv = "labels.csv"
 flat_data_arr = []
 target_arr = []
@@ -19,8 +19,7 @@ for class_id in labels_df["ClassId"]:
     for img in os.listdir(path):
         try:
             img_array = imread(os.path.join(path, img))
-
-            resized_img = resize(img_array, (100, 100), anti_aliasing=True)
+            resized_img = resize(img_array, (32, 32), anti_aliasing=True)
             flattened_img = resized_img.flatten()
 
             if len(flat_data_arr) > 0 and len(flattened_img) != len(flat_data_arr[0]):
@@ -45,6 +44,6 @@ df["Target"] = target
 print("DataFrame shape:", df.shape)
 print(df)
 
-pickle.dump(df, open("./pickles/validation100x100.pickle", "wb"))
+pickle.dump(df, open("./pickles/data32x32.pickle", "wb"))
 print("Pickle is dumped successfully")
 
