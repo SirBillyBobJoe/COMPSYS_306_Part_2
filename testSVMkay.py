@@ -1,22 +1,19 @@
 import joblib
 import pickle
-import numpy as np
-import tensorflow as tf
 from sklearn.metrics import classification_report
 
-modelPath = "joblibs/poly32x32-3.joblib"
-scalarPath = 'joblibs/polyscaler32x32.joblib'
-validationPath = 'pickles/validationdata32x32.pickle'
+modelPath = "joblibs/svm_model.joblib"
+scalarPath = 'joblibs/scaler.joblib'
+validationPath = 'pickles/validationData.pickle'
 
 # Load the model
 model = joblib.load(modelPath) 
 
 # Load the validation data
-df = pickle.load(open(validationPath, 'rb'))
+data_dict  = pickle.load(open(validationPath, 'rb'))
 
-# Separate features and target
-X = df.drop(columns=['Target'])
-y = df['Target']
+X = data_dict['data']
+y = data_dict['target']
 
 # Normalise the data.
 scaler = joblib.load(scalarPath)

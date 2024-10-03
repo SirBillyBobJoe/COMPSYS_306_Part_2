@@ -1,20 +1,25 @@
 import os
 import numpy as np
 from skimage.io import imread
-import pandas as pd
 import pickle
 from skimage.transform import resize
 
-datadir = "myData"
-label_csv = "labels.csv"
+datadir = "./validation"
+label_csv = "./labels.csv"
 flat_data_arr = []
 target_arr = []
 
-labels_df = pd.read_csv(label_csv)
-print(f"Loaded labels:\n{labels_df.head()}")
+# Read the CSV file manually, avoiding pandas
+labels_df = []
+with open(label_csv, 'r') as f:
+    for line in f.readlines()[1:]:  # Skipping header
+        class_id = line.strip().split(",")[0]
+        labels_df.append(int(class_id))
 
-for class_id in labels_df["ClassId"]:
+print(f"Loaded labels:\n{labels_df[:5]}")
 
+# Iterate over the labels and load images
+for class_id in labels_df:
     path = os.path.join(datadir, str(class_id))
     for img in os.listdir(path):
         try:
@@ -22,6 +27,7 @@ for class_id in labels_df["ClassId"]:
             resized_img = resize(img_array, (32, 32), anti_aliasing=True)
             flattened_img = resized_img.flatten()
 
+            # Ensure consistent shape
             if len(flat_data_arr) > 0 and len(flattened_img) != len(flat_data_arr[0]):
                 print(f"Skipping image {img} due to inconsistent shape: {flattened_img.shape}")
                 continue
@@ -34,16 +40,20 @@ for class_id in labels_df["ClassId"]:
 
     print(f"Loaded category: {class_id} successfully")
 
+# Convert to numpy arrays
 flat_data = np.array(flat_data_arr)
 target = np.array(target_arr)
 
-df = pd.DataFrame(flat_data)
-df["Target"] = target
+# Combine data manually, mimicking the pandas dataframe structure
+combined_data = {
+    "data": flat_data,
+    "target": target
+}
 
+# Print shape of data for confirmation
+print("Data shape:", flat_data.shape)
+print("Target shape:", target.shape)
 
-print("DataFrame shape:", df.shape)
-print(df)
-
-pickle.dump(df, open("./pickles/data32x32.pickle", "wb"))
+# Dump the data using pickle
+pickle.dump(combined_data, open("./pickles/validationData.pickle", "wb"))
 print("Pickle is dumped successfully")
-
