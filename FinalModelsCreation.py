@@ -24,9 +24,9 @@ joblib.dump(scaler, './joblibs/scaler.joblib')
     # Train SVM
 print("Training...")
 model = svm.SVC(
-    C=0.01,
+    C=0.001,
     kernel='poly',
-    degree=3,
+    degree=2,
     gamma=0.1,
     probability=True,
     class_weight='balanced',

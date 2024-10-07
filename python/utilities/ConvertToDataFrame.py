@@ -4,7 +4,7 @@ from skimage.io import imread
 import pickle
 from skimage.transform import resize
 
-datadir = "./validation"
+datadir = "./myData"
 label_csv = "./labels.csv"
 flat_data_arr = []
 target_arr = []
@@ -16,7 +16,7 @@ with open(label_csv, 'r') as f:
         class_id = line.strip().split(",")[0]
         labels_df.append(int(class_id))
 
-print(f"Loaded labels:\n{labels_df[:5]}")
+print(f"Loaded labels:\n{labels_df[:6]}")
 
 # Iterate over the labels and load images
 for class_id in labels_df:
@@ -55,5 +55,5 @@ print("Data shape:", flat_data.shape)
 print("Target shape:", target.shape)
 
 # Dump the data using pickle
-pickle.dump(combined_data, open("./pickles/validationData.pickle", "wb"))
+pickle.dump(combined_data, open("./pickles/data.pickle", "wb"))
 print("Pickle is dumped successfully")
