@@ -1,24 +1,27 @@
 import joblib
 import pickle
-import tensorflow as tf
 from sklearn.metrics import classification_report
 
-# Load the model and scaler
-model = joblib.load("./joblibs/SVM_Model.joblib")
-scaler = joblib.load("./joblibs/SVM_Scaler.joblib")
+modelPath = "joblibs/svm_model.joblib"
+scalarPath = 'joblibs/scaler.joblib'
+validationPath = 'pickles/validationData.pickle'
+
+# Load the model
+model = joblib.load(modelPath) 
 
 # Load the validation data
-df = pickle.load(open('pickles/validationData.pickle', 'rb'))
+data_dict  = pickle.load(open(validationPath, 'rb'))
 
-# Separate features and target
-X = df.drop(columns=['Target'])
-y = df['Target']
+X = data_dict['data']
+y = data_dict['target']
 
-# Scale the features using the loaded scaler
-X_scaled = scaler.transform(X)
+# Normalise the data.
+scaler = joblib.load(scalarPath)
+x_test_standardised = scaler.transform(X)
+
 print("predicting")
 # Make predictions
-prediction = model.predict(X_scaled)
+prediction = model.predict(x_test_standardised)
 print("done prediction")
 # Check the shape of the predictions
 print("Prediction shape:", prediction.shape)
