@@ -9,12 +9,6 @@ data_dict = pickle.load(open('./pickles/data.pickle', 'rb'))
 x = data_dict['data']
 y = data_dict['target']
 
-# Load dataset
-data_dict = pickle.load(open('./pickles/data.pickle', 'rb'))
-# Extract features and target from the dictionary
-x = data_dict['data']
-y = data_dict['target']
-
 # Standardize data
 scaler = StandardScaler()
 x_train_normalised = scaler.fit_transform(x)

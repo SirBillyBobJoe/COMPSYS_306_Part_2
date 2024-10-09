@@ -4,7 +4,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import GridSearchCV, train_test_split
 
 # Load dataset
-data_dict = pickle.load(open('pickles/data32x32.pickle', 'rb'))
+data_dict = pickle.load(open('pickles/data.pickle', 'rb'))
 x = data_dict['data']
 y = data_dict['target']
 
@@ -36,4 +36,3 @@ print(f"Best: {model.best_score_} using {model.best_params_}")
 
 # Test Accuracy: 1.0
 # Best: 0.9990829310490398 using {'C': 0.001, 'degree': 2, 'gamma': 0.1, 'kernel': 'poly'}
-# (.venv) kay@Kays-Laptop COMPSYS_306_Part_2 % 

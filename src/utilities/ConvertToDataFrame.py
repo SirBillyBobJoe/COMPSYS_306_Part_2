@@ -4,12 +4,12 @@ from skimage.io import imread
 import pickle
 from skimage.transform import resize
 
-datadir = "./myData"
-label_csv = "./labels.csv"
+datadir = "dataset"
+label_csv = "labels.csv"
+outputFileName = "data.pickle"
 flat_data_arr = []
 target_arr = []
 
-# Read the CSV file manually, avoiding pandas
 labels_df = []
 with open(label_csv, 'r') as f:
     for line in f.readlines()[1:]:  # Skipping header
@@ -55,5 +55,5 @@ print("Data shape:", flat_data.shape)
 print("Target shape:", target.shape)
 
 # Dump the data using pickle
-pickle.dump(combined_data, open("./pickles/data.pickle", "wb"))
+pickle.dump(combined_data, open(f"./pickles/{outputFileName}", "wb"))
 print("Pickle is dumped successfully")
