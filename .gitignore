@@ -5,5 +5,4 @@
 # Don't include processed data (pickled data) because files are too large
 pickles/*
 *.joblib
-
 .DS_Store
