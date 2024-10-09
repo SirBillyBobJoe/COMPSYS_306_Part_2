@@ -30,7 +30,7 @@ model = svm.SVC(
     gamma=0.1,
     probability=True,
     class_weight='balanced',
-    max_iter=10000
+    max_iter=30000
 )
 model.fit(x_train_normalised, y)
 print("Training completed")
