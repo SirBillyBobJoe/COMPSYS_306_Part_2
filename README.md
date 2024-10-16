@@ -1,4 +1,8 @@
 # Project-2
+In this project, our team collected a custom dataset and trained an SVM to recognise a specific set of traffic signs. 
+Using the trained model, a robot equipped with a Jetson Nano will perform real-time traffic sign recognition and respond 
+appropriately based on the detected signs.
+
 > [!NOTE]
 > This project requires Python version 3.6.9+. Using a Python version lower than 3.6.9 may cause dependencies to become corrupted or fail to install properly.
 >
@@ -49,3 +53,13 @@ Follow these chronological steps (within the root directory) to run the project:
    ```sh
    python -m src.FinalModelCreation
    ```
+
+### Team Members
+| Name         | UPI     | GitHub Username  |
+|--------------|---------|------------------|
+| Gallon Zhou  | gzho038 | [DuckyShine004](https://github.com/DuckyShine004) |
+| Kay Tang | ktan185 | [ktan185](https://github.com/ktan185) |
+| Hoanh Tong-ho | hton892 | [SirBillyBobJoe](https://github.com/SirBillyBobJoe)
+| Omar Bushnaq | obus | [OmarBushnaq0](https://github.com/OmarBushnaq0) |
+
+
