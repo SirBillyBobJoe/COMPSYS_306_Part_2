@@ -12,7 +12,7 @@ appropriately based on the detected signs.
 Follow these steps to set up project:
 1. Clone the repository
    ```sh
-   git clone https://github.com/DuckyShine004/chat-app-python
+   git clone https://github.com/SirBillyBobJoe/COMPSYS_306_Part_2/tree/final-submission
    ```
 2. Create a virtual environment (ensure you're using Python 3.6.9 or later)
    ```sh
@@ -60,6 +60,6 @@ Follow these chronological steps (within the root directory) to run the project:
 | Gallon Zhou  | gzho038 | [DuckyShine004](https://github.com/DuckyShine004) |
 | Kay Tang | ktan185 | [ktan185](https://github.com/ktan185) |
 | Hoanh Tong-ho | hton892 | [SirBillyBobJoe](https://github.com/SirBillyBobJoe)
-| Omar Bushnaq | obus | [OmarBushnaq0](https://github.com/OmarBushnaq0) |
+| Omar Bushnaq | obus342 | [OmarBushnaq0](https://github.com/OmarBushnaq0) |
 
 
