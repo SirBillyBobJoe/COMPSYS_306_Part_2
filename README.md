@@ -20,11 +20,11 @@ Follow these steps to set up project:
    ```
 3. Activate the virtual environment:
    ```sh
-   source ./vevn/bin/activate
+   source ./venv/bin/activate
    ```
    On Windows:
    ```sh
-   source .venv\Scripts\activate
+   .venv\Scripts\activate
    ```
 4. Before installing dependencies, upgrade pip, setuptools, and wheel by running
    ```sh
@@ -53,6 +53,16 @@ Follow these chronological steps (within the root directory) to run the project:
    ```sh
    python -m src.FinalModelCreation
    ```
+
+### About Repository
+Our training workflow was as follows:
+
+1. Load data into a data frame using `ConvertToDataFrame.py`
+2. Getting the best model parameters using `SVMTuning.py`
+3. Testing the SVM using both `testSVM.py` and `testSVMShowFailingImage.py`
+4. Creating final model to load onto the model using `FinalModelCreation.py`
+
+* The directory 'joblibs' contains the final SVM model and StandardScaler used on the robot.
 
 ### Team Members
 | Name         | UPI     | GitHub Username  |
